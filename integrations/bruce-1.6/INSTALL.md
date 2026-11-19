@@ -1,31 +1,33 @@
 # SCHILD per Bruce 1.6
 
-Questa cartella contiene il primo adattatore menu specifico per il tag Bruce `1.6`.
+Questa integrazione aggiunge **SCHILD come voce del menu principale** di Bruce 1.6.
 
-## File
+## Installazione
 
-- `src/core/menu_items/SchildMenu.h`
-- `src/core/menu_items/SchildMenu.cpp`
-- `menu.patch`
+1. Scarica il sorgente Bruce dal tag/branch 1.6 e apri la sua cartella principale.
+2. Fai una copia di sicurezza del sorgente.
+3. Scarica questo file dal repository SCHILD: `integrations/bruce-1.6/menu.patch`.
+4. Copia `menu.patch` nella cartella principale del sorgente Bruce.
+5. Apri un terminale in quella cartella ed esegui:
 
-## Installazione nel sorgente Bruce 1.6
+```sh
+git apply --check menu.patch
+git apply menu.patch
+```
 
-1. Fai una copia della cartella del firmware Bruce.
-2. Copia `SchildMenu.h` e `SchildMenu.cpp` in `src/core/menu_items/` del sorgente Bruce.
-3. Applica `menu.patch` dalla cartella principale del sorgente Bruce, oppure modifica a mano i due file:
-   - in `src/core/main_menu.h`, aggiungi l'include di `menu_items/SchildMenu.h`, poi il membro `SchildMenu schildMenu;`
-   - in `src/core/main_menu.cpp`, aggiungi `&schildMenu,` nell'elenco `_menuItems`.
-4. Copia i file del core SCHILD GPS e le relative dipendenze nella struttura prevista dal progetto.
-5. Compila Bruce per la tua precisa variante CYD.
+6. Se il primo comando non segnala errori, il secondo applica la modifica.
+7. Compila Bruce selezionando la configurazione esatta della tua CYD.
 
-## Cosa compare
+La patch crea `src/core/menu_items/SchildMenu.h` e `SchildMenu.cpp`, registra la classe in `main_menu.h` e aggiunge la voce all'elenco in `main_menu.cpp`.
 
-Dopo l'integrazione, nel carosello del menu principale appare la voce **SCHILD**. Per ora apre una schermata iniziale con voci informative per stato, RF, GPS e test schermatura.
+## Funzioni presenti in questa prima integrazione
 
-## Limiti attuali
+- Voce **SCHILD** nel menu principale.
+- Stato del modulo.
+- Pagine informative per analisi RF passiva, GPS e test schermatura.
 
-- Non è ancora un firmware pronto e non è stato compilato o provato su una CYD.
-- Le schermate RF e schermatura sono segnaposto: non pilotano hardware.
-- Il GPS è predisposto a livello parser NMEA, ma UART, pin e ricevitore non sono ancora configurati.
-- Non collegare il modulo NRF HAT usando pin non verificati.
-- Le funzioni radio previste sono esclusivamente di osservazione/ricezione passiva.
+## Importante: cosa non è ancora collegato
+
+Questa versione collega **il menu**, non ancora i driver hardware. Le pagine RF e schermatura sono informative e non leggono ancora l'NRF HAT o un sensore EMF. Il GPS non è ancora collegato alla UART. Non vengono eseguite trasmissioni radio.
+
+Non sono stati verificati i pin del tuo HAT CYD e non è stato eseguito un build su hardware: non collegare pin a tentativi. Il firmware `.bin` verrà prodotto solo dopo aver integrato i driver corretti e compilato per la precisa variante della scheda.
