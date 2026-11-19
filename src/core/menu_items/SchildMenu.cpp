@@ -1,52 +1,24 @@
 #include "SchildMenu.h"
 #include "core/display.h"
-#include "core/mykeyboard.h"
 
-static void schildShowInfo(const String& title, const String& line1,
-                           const String& line2, const String& line3) {
-    tft.fillScreen(BGCOLOR);
-    drawMainBorderWithTitle(title);
-    setTftDisplay(12, 48, FGCOLOR, FM, BGCOLOR);
-    tft.println(line1);
-    tft.println(line2);
-    tft.println(line3);
-    setTftDisplay(12, HEIGHT - 25, FGCOLOR, FP, BGCOLOR);
-    tft.print("BACK per tornare");
-    while (!checkEscPress()) {
-        delay(20);
-    }
-    returnToMenu = true;
-}
+// SCHILD menu for Bruce 1.6.
+// This first integration is deliberately passive: it exposes the module
+// entry points without enabling radio transmission or assuming hardware pins.
 
 void SchildMenu::optionsMenu() {
     options = {
-        {"Stato progetto", []() {
-            schildShowInfo("SCHILD / STATO",
-                "Interfaccia Bruce 1.6",
-                "Moduli hardware in sviluppo",
-                "Nessuna trasmissione attiva");
+        {"Stato SCHILD", []() {
+            displayInfo("SCHILD: menu Bruce 1.6 attivo. Driver hardware in integrazione.", true);
         }},
-        {"Analisi RF", []() {
-            schildShowInfo("SCHILD / RF",
-                "Modulo passivo previsto",
-                "Richiede driver compatibile",
-                "Nessun TX / jammer");
+        {"Analisi RF passiva", []() {
+            displayInfo("RF passiva: richiede NRF HAT verificato e driver RX. Nessuna trasmissione.", true);
         }},
         {"GPS", []() {
-            schildShowInfo("SCHILD / GPS",
-                "GPS opzionale non collegato",
-                "Parser NMEA nel core SCHILD",
-                "UART da configurare");
+            displayInfo("GPS opzionale: parser NMEA predisposto. UART e pin da configurare.", true);
         }},
         {"Test schermatura", []() {
-            schildShowInfo("SCHILD / SHIELD",
-                "Test comparativo previsto",
-                "Servono sensori supportati",
-                "Misure da validare");
+            displayInfo("Test comparativo: richiede sensore adatto e calibrazione. NRF24 non misura EMF assoluto.", true);
         }},
-        {"Torna al menu", []() {
-            backToMenu();
-        }}
     };
 
     delay(150);
