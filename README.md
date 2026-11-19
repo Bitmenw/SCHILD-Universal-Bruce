@@ -37,3 +37,8 @@ Il progetto è orientato a ricezione passiva, osservazione e misure. Non impleme
 5. Integrare e testare il GPS quando sarà acquistato.
 
 Vedi [ARCHITECTURE](docs/ARCHITECTURE.md) e [HARDWARE](docs/HARDWARE.md).
+
+
+## Integrazione Bruce 1.6
+
+È stato aggiunto un primo adattatore di menu per Bruce 1.6: `src/core/menu_items/SchildMenu.h` e `SchildMenu.cpp`. La patch per registrare la voce SCHILD nel menu principale e le istruzioni sono in [`integrations/bruce-1.6/`](integrations/bruce-1.6/). È una schermata iniziale con funzioni informative, non ancora i driver RF/GPS e non è stata compilata o testata su CYD.
