@@ -1,3 +1,68 @@
+diff --git a/src/core/menu_items/SchildMenu.h b/src/core/menu_items/SchildMenu.h
+new file mode 100644
+index 0000000..1111111
+--- /dev/null
++++ b/src/core/menu_items/SchildMenu.h
+@@ -0,0 +1,16 @@
++#ifndef __SCHILD_MENU_H__
++#define __SCHILD_MENU_H__
++
++#include "MenuItemInterface.h"
++
++class SchildMenu : public MenuItemInterface {
++public:
++    void optionsMenu(void) override;
++    void draw(void) override;
++    String getName(void) override;
++
++private:
++    String _name = "SCHILD";
++};
++
++#endif
+diff --git a/src/core/menu_items/SchildMenu.cpp b/src/core/menu_items/SchildMenu.cpp
+new file mode 100644
+index 0000000..1111111
+--- /dev/null
++++ b/src/core/menu_items/SchildMenu.cpp
+@@ -0,0 +1,37 @@
++#include "SchildMenu.h"
++#include "core/display.h"
++
++// SCHILD menu for Bruce 1.6.
++// Passive entry points only; no radio transmission or assumed pin mapping.
++
++void SchildMenu::optionsMenu() {
++    options = {
++        {"Stato SCHILD", []() {
++            displayInfo("SCHILD: menu Bruce 1.6 attivo. Driver hardware in integrazione.", true);
++        }},
++        {"Analisi RF passiva", []() {
++            displayInfo("RF passiva: richiede NRF HAT verificato e driver RX. Nessuna trasmissione.", true);
++        }},
++        {"GPS", []() {
++            displayInfo("GPS opzionale: parser NMEA predisposto. UART e pin da configurare.", true);
++        }},
++        {"Test schermatura", []() {
++            displayInfo("Test comparativo: richiede sensore adatto e calibrazione. NRF24 non misura EMF assoluto.", true);
++        }},
++    };
++
++    delay(150);
++    loopOptions(options, false, true, "SCHILD");
++}
++
++String SchildMenu::getName() {
++    return _name;
++}
++
++void SchildMenu::draw() {
++    tft.fillRect(iconX, iconY, 80, 80, BGCOLOR);
++    tft.drawCircle(iconX + 40, iconY + 40, 30, FGCOLOR);
++    tft.drawCircle(iconX + 40, iconY + 40, 22, FGCOLOR);
++    tft.drawLine(iconX + 18, iconY + 40, iconX + 62, iconY + 40, FGCOLOR);
++    tft.drawLine(iconX + 40, iconY + 18, iconX + 40, iconY + 62, FGCOLOR);
++}
 diff --git a/src/core/main_menu.h b/src/core/main_menu.h
 --- a/src/core/main_menu.h
 +++ b/src/core/main_menu.h
