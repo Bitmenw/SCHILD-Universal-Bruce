@@ -72,7 +72,7 @@ diff --git a/src/core/main_menu.h b/src/core/main_menu.h
  #include "menu_items/ScriptsMenu.h"
 +#include "menu_items/SchildMenu.h"
  #include "menu_items/WifiMenu.h"
-@@ -29,5 +29,6 @@
+@@ -30,4 +30,5 @@
      RFIDMenu rfidMenu;
      RFMenu rfMenu;
      ScriptsMenu scriptsMenu;
