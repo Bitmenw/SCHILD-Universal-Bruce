@@ -1,20 +1,29 @@
 diff --git a/src/core/main_menu.h b/src/core/main_menu.h
 --- a/src/core/main_menu.h
 +++ b/src/core/main_menu.h
-@@
+@@ -12,6 +12,7 @@
+ #include "menu_items/RFIDMenu.h"
+ #include "menu_items/RFMenu.h"
  #include "menu_items/ScriptsMenu.h"
- #include "menu_items/WifiMenu.h"
 +#include "menu_items/SchildMenu.h"
-@@
+ #include "menu_items/WifiMenu.h"
+ 
+@@ -27,6 +28,7 @@
+     RFIDMenu rfidMenu;
+     RFMenu rfMenu;
      ScriptsMenu scriptsMenu;
-     WifiMenu wifiMenu;
 +    SchildMenu schildMenu;
+     WifiMenu wifiMenu;
  
      MainMenu();
 diff --git a/src/core/main_menu.cpp b/src/core/main_menu.cpp
 --- a/src/core/main_menu.cpp
 +++ b/src/core/main_menu.cpp
-@@
+@@ -13,6 +13,7 @@
+         &scriptsMenu,
+     #endif
          &othersMenu,
 +        &schildMenu,
          &clockMenu,
+         &connectMenu,
+         &configMenu,
