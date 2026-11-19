@@ -1,0 +1,20 @@
+diff --git a/src/core/main_menu.h b/src/core/main_menu.h
+--- a/src/core/main_menu.h
++++ b/src/core/main_menu.h
+@@
+ #include "menu_items/ScriptsMenu.h"
+ #include "menu_items/WifiMenu.h"
++#include "menu_items/SchildMenu.h"
+@@
+     ScriptsMenu scriptsMenu;
+     WifiMenu wifiMenu;
++    SchildMenu schildMenu;
+ 
+     MainMenu();
+diff --git a/src/core/main_menu.cpp b/src/core/main_menu.cpp
+--- a/src/core/main_menu.cpp
++++ b/src/core/main_menu.cpp
+@@
+         &othersMenu,
++        &schildMenu,
+         &clockMenu,
